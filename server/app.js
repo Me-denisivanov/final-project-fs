@@ -34,10 +34,12 @@ async function start() {
 			initDatabase();
 		});
 
-		await mongoose.connect(config.get('mongoUri'));
+		// await mongoose.connect(config.get('mongoUri'));
+		await mongoose.connect(config.get(process.env.MONGODB_URI));
+
 		console.log('MongoDB success');
 
-		app.listen(PORT, () => {
+		app.listen(process.env.PORT || 6050, () => {
 			console.log(`Server started on port ${PORT}...`);
 		});
 	} catch (e) {
